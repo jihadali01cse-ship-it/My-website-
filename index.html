@@ -1,9 +1,22 @@
- <!DOCTYPE html> 
-<html>
+  <!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+
+    <!-- Mobile responsive -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Jihad Ali My Website</title>
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             margin: 0;
             font-family: Arial, sans-serif;
@@ -11,45 +24,59 @@
             color: #222;
         }
 
+        /* Navigation */
         nav {
-            background: black;
-            padding: 20px;
+            background: #111;
+            padding: 18px 10px;
             text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
         nav a {
             color: white;
             text-decoration: none;
-            margin: 20px;
-            font-size: 18px;
+            margin: 0 12px;
+            font-size: 17px;
         }
 
         nav a:hover {
             color: #00bfff;
         }
 
+        /* Home */
         .home {
             text-align: center;
             padding: 100px 20px;
             color: white;
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
-        h1 {
-            font-size: 45px;
+        .home h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
         }
 
-        p {
+        .home p {
             font-size: 20px;
+            max-width: 700px;
+            line-height: 1.6;
         }
 
         button {
-            padding: 12px 25px;
-            font-size: 18px;
+            padding: 13px 25px;
+            font-size: 17px;
             cursor: pointer;
             border: none;
             border-radius: 8px;
             background: white;
             color: #333;
+            margin-top: 15px;
         }
 
         button:hover {
@@ -57,14 +84,172 @@
             color: white;
         }
 
+        /* About and Contact */
         .box {
             background: white;
-            max-width: 600px;
-            margin
-           
-        
-        
+            width: 90%;
+            max-width: 650px;
+            margin: 50px auto;
+            padding: 40px 25px;
+            text-align: center;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .box h1 {
+            font-size: 35px;
+        }
+
+        .box p {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        /* Form */
+        input,
+        textarea {
+            width: 100%;
+            padding: 13px;
+            margin: 8px 0;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+        }
+
+        textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+
+            nav {
+                padding: 15px 5px;
+            }
+
+            nav a {
+                margin: 0 6px;
+                font-size: 15px;
+            }
+
+            .home {
+                padding: 70px 15px;
+            }
+
+            .home h1 {
+                font-size: 34px;
+            }
+
+            .home p {
+                font-size: 17px;
+            }
+
+            .box {
+                width: 92%;
+                padding: 30px 18px;
+                margin: 35px auto;
+            }
+
+            .box h1 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+    </nav>
 
 
-  
-    
+    <!-- Home -->
+    <section id="home" class="home">
+
+        <h1>Jihad Ali My Website</h1>
+
+        <p>
+            Welcome to my personal website.
+            I am a Computer Science Engineering student.
+        </p>
+
+        <button onclick="document.getElementById('about').scrollIntoView()">
+            Explore My Website
+        </button>
+
+    </section>
+
+
+    <!-- About -->
+    <section id="about" class="box">
+
+        <h1>About Me</h1>
+
+        <p>
+            Hello! I am Jihad Ali.
+        </p>
+
+        <p>
+            I am a Computer Science Engineering student
+            interested in learning new technologies
+            and improving my skills.
+        </p>
+
+    </section>
+
+
+    <!-- Contact -->
+    <section id="contact" class="box">
+
+        <h1>Contact Me</h1>
+
+        <p>Send me a message</p>
+
+        <form onsubmit="sendMessage(event)">
+
+            <input
+                type="text"
+                placeholder="Your Name"
+                required
+            >
+
+            <input
+                type="email"
+                placeholder="Your Email"
+                required
+            >
+
+            <textarea
+                placeholder="Your Message"
+                required
+            ></textarea>
+
+            <button type="submit">
+                Send Message
+            </button>
+
+        </form>
+
+    </section>
+
+
+    <!-- JavaScript -->
+    <script>
+
+        function sendMessage(event) {
+
+            event.preventDefault();
+
+            alert("Thank you! Your message has been received.");
+
+        }
+
+    </script>
+
+</body>
+</html>
