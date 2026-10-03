@@ -21,34 +21,62 @@
             font-family: Arial, sans-serif;
             background: #f4f7fb;
             color: #222;
+            transition: 0.3s;
         }
 
-        /* Navigation */
+        /* =========================
+           NAVIGATION
+        ========================== */
+
         nav {
             background: #101827;
-            padding: 18px;
-            text-align: center;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 25px;
             position: sticky;
             top: 0;
             z-index: 1000;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
         }
 
         nav a {
             color: white;
             text-decoration: none;
-            margin: 0 15px;
-            font-size: 17px;
+            font-size: 16px;
             font-weight: bold;
+            transition: 0.3s;
         }
 
         nav a:hover {
             color: #00d4ff;
         }
 
-        /* Home */
+        /* Theme Button */
+
+        .theme-button {
+            width: auto;
+            padding: 8px 14px;
+            margin: 0;
+            border-radius: 20px;
+            background: #ffffff;
+            color: #172033;
+            font-size: 14px;
+        }
+
+        .theme-button:hover {
+            background: #00d4ff;
+            color: white;
+        }
+
+        /* =========================
+           HOME
+        ========================== */
+
         .home {
-            min-height: 90vh;
-            padding: 60px 20px;
+            min-height: 92vh;
+            padding: 70px 20px;
             text-align: center;
             color: white;
 
@@ -57,50 +85,69 @@
             justify-content: center;
             align-items: center;
 
-            background: linear-gradient(
-                135deg,
-                #101827,
-                #1d3557,
-                #264b70
-            );
+            background:
+                radial-gradient(
+                    circle at top left,
+                    rgba(0,212,255,0.25),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at bottom right,
+                    rgba(100,70,200,0.30),
+                    transparent 35%
+                ),
+                linear-gradient(
+                    135deg,
+                    #101827,
+                    #1d3557,
+                    #264b70
+                );
         }
 
         .profile-photo {
-            width: 170px;
-            height: 170px;
+            width: 175px;
+            height: 175px;
             object-fit: cover;
             border-radius: 50%;
             border: 5px solid white;
             margin-bottom: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+
+            box-shadow:
+                0 15px 40px rgba(0,0,0,0.45);
+
+            transition: 0.4s;
+        }
+
+        .profile-photo:hover {
+            transform: scale(1.05);
         }
 
         .welcome {
             color: #00d4ff;
             font-size: 15px;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             margin-bottom: 12px;
             font-weight: bold;
         }
 
         .home h1 {
-            font-size: 52px;
-            margin-bottom: 20px;
+            font-size: 55px;
+            margin-bottom: 18px;
         }
 
         .home p {
-            max-width: 700px;
-            font-size: 19px;
+            max-width: 720px;
+            font-size: 20px;
             line-height: 1.7;
             color: #e8eef5;
         }
 
-        .buttons {
+        .home-buttons {
             margin-top: 30px;
         }
 
-        button {
-            padding: 13px 25px;
+        .home-buttons button {
+            padding: 14px 28px;
             margin: 5px;
             border: none;
             border-radius: 30px;
@@ -109,44 +156,62 @@
             cursor: pointer;
             background: white;
             color: #172033;
+            transition: 0.3s;
         }
 
-        button:hover {
+        .home-buttons button:hover {
+            transform: translateY(-4px);
             background: #00d4ff;
             color: white;
+            box-shadow: 0 10px 25px rgba(0,212,255,0.3);
         }
 
-        .outline {
+        .home-buttons .outline {
             background: transparent;
             color: white;
             border: 2px solid white;
         }
 
-        /* Sections */
-        .section {
-            padding: 80px 20px;
+        .home-buttons .outline:hover {
+            background: white;
+            color: #172033;
         }
 
-        /* About */
+        /* =========================
+           SECTIONS
+        ========================== */
+
+        .section {
+            padding: 85px 20px;
+        }
+
+        /* =========================
+           ABOUT
+        ========================== */
+
+        #about {
+            background: #f4f7fb;
+        }
+
         .about-box {
-            max-width: 850px;
+            max-width: 900px;
             margin: auto;
             background: white;
-            padding: 50px 35px;
+            padding: 55px 40px;
             text-align: center;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-radius: 22px;
+            box-shadow: 0 12px 35px rgba(0,0,0,0.1);
         }
 
         .about-box h2,
         .contact-box h2 {
-            font-size: 38px;
+            font-size: 40px;
             color: #172033;
             margin-bottom: 15px;
         }
 
         .line {
-            width: 70px;
+            width: 75px;
             height: 4px;
             background: #00a8cc;
             margin: 0 auto 30px;
@@ -164,20 +229,26 @@
             display: flex;
             justify-content: center;
             gap: 20px;
-            margin-top: 30px;
+            margin-top: 35px;
             flex-wrap: wrap;
         }
 
         .card {
-            width: 220px;
-            padding: 25px 15px;
+            width: 230px;
+            padding: 28px 18px;
             background: #f5f9fc;
             border: 1px solid #e0e8ef;
-            border-radius: 15px;
+            border-radius: 16px;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.1);
         }
 
         .card h3 {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             color: #172033;
         }
 
@@ -186,24 +257,22 @@
             line-height: 1.5;
         }
 
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
+        /* =========================
+           CONTACT
+        ========================== */
 
-        /* Contact */
         #contact {
             background: #eaf1f8;
         }
 
         .contact-box {
-            max-width: 750px;
+            max-width: 780px;
             margin: auto;
             background: white;
-            padding: 50px 35px;
+            padding: 55px 40px;
             text-align: center;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-radius: 22px;
+            box-shadow: 0 12px 35px rgba(0,0,0,0.1);
         }
 
         .contact-box > p {
@@ -219,20 +288,24 @@
 
         .info {
             display: inline-block;
-            padding: 12px 18px;
+            padding: 13px 20px;
             margin: 5px;
             background: #f5f9fc;
-            border-radius: 10px;
             border: 1px solid #e0e8ef;
+            border-radius: 10px;
         }
+
+        /* =========================
+           FORM
+        ========================== */
 
         input,
         textarea {
             width: 100%;
-            padding: 14px;
+            padding: 15px;
             margin: 8px 0;
             border: 1px solid #ddd;
-            border-radius: 8px;
+            border-radius: 9px;
             font-size: 16px;
             font-family: Arial, sans-serif;
             outline: none;
@@ -241,6 +314,7 @@
         input:focus,
         textarea:focus {
             border-color: #00a8cc;
+            box-shadow: 0 0 0 3px rgba(0,168,204,0.1);
         }
 
         textarea {
@@ -249,38 +323,113 @@
         }
 
         .send {
+            padding: 14px 30px;
             margin-top: 15px;
             background: #172033;
             color: white;
-            width: auto;
+            border: none;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
         }
 
         .send:hover {
             background: #00a8cc;
         }
 
-        /* Footer */
+        /* =========================
+           FOOTER
+        ========================== */
+
         footer {
             background: #101827;
             color: white;
             text-align: center;
-            padding: 25px 10px;
+            padding: 28px 10px;
         }
 
         footer p {
             color: #cbd5e1;
         }
 
-        /* Mobile */
+        /* =========================
+           DARK MODE
+        ========================== */
+
+        body.dark {
+            background: #0f172a;
+            color: #e5e7eb;
+        }
+
+        body.dark #about {
+            background: #0f172a;
+        }
+
+        body.dark #contact {
+            background: #111827;
+        }
+
+        body.dark .about-box,
+        body.dark .contact-box {
+            background: #1e293b;
+            color: #e5e7eb;
+            box-shadow: 0 12px 35px rgba(0,0,0,0.35);
+        }
+
+        body.dark .about-box h2,
+        body.dark .contact-box h2 {
+            color: white;
+        }
+
+        body.dark .about-box > p,
+        body.dark .contact-box > p {
+            color: #cbd5e1;
+        }
+
+        body.dark .card,
+        body.dark .info {
+            background: #263449;
+            border-color: #3b4a61;
+        }
+
+        body.dark .card h3 {
+            color: white;
+        }
+
+        body.dark .card p {
+            color: #cbd5e1;
+        }
+
+        body.dark input,
+        body.dark textarea {
+            background: #111827;
+            color: white;
+            border-color: #475569;
+        }
+
+        body.dark input::placeholder,
+        body.dark textarea::placeholder {
+            color: #94a3b8;
+        }
+
+        /* =========================
+           MOBILE
+        ========================== */
+
         @media (max-width: 600px) {
 
             nav {
-                padding: 14px 5px;
+                padding: 13px 5px;
+                gap: 12px;
             }
 
             nav a {
-                margin: 0 7px;
-                font-size: 14px;
+                font-size: 13px;
+            }
+
+            .theme-button {
+                font-size: 12px;
+                padding: 7px 10px;
             }
 
             .home {
@@ -301,24 +450,24 @@
                 font-size: 16px;
             }
 
-            .buttons {
+            .home-buttons {
                 width: 100%;
                 max-width: 280px;
             }
 
-            button {
+            .home-buttons button {
                 width: 100%;
                 margin: 6px 0;
             }
 
             .section {
-                padding: 50px 12px;
+                padding: 55px 12px;
             }
 
             .about-box,
             .contact-box {
                 width: 100%;
-                padding: 35px 18px;
+                padding: 38px 18px;
             }
 
             .about-box h2,
@@ -353,14 +502,28 @@
 <body>
 
     <!-- Navigation -->
+
     <nav>
+
         <a href="#home">Home</a>
+
         <a href="#about">About</a>
+
         <a href="#contact">Contact</a>
+
+        <button
+            class="theme-button"
+            onclick="toggleTheme()"
+            id="themeButton"
+        >
+            🌙 Dark
+        </button>
+
     </nav>
 
 
     <!-- Home -->
+
     <section id="home" class="home">
 
         <img
@@ -373,7 +536,9 @@
             WELCOME TO MY WEBSITE
         </div>
 
-        <h1>Jihad Website</h1>
+        <h1>
+            Jihad Website
+        </h1>
 
         <p>
             I am a Computer Science Engineering student
@@ -381,7 +546,7 @@
             improving my skills and building new things.
         </p>
 
-        <div class="buttons">
+        <div class="home-buttons">
 
             <button onclick="goTo('about')">
                 About Me
@@ -400,11 +565,14 @@
 
 
     <!-- About -->
+
     <section id="about" class="section">
 
         <div class="about-box">
 
-            <h2>About Me</h2>
+            <h2>
+                About Me
+            </h2>
 
             <div class="line"></div>
 
@@ -422,7 +590,9 @@
 
                 <div class="card">
 
-                    <h3>🎓 Education</h3>
+                    <h3>
+                        🎓 Education
+                    </h3>
 
                     <p>
                         Computer Science Engineering Student
@@ -430,9 +600,12 @@
 
                 </div>
 
+
                 <div class="card">
 
-                    <h3>💻 Interest</h3>
+                    <h3>
+                        💻 Interest
+                    </h3>
 
                     <p>
                         Technology, Coding and Software
@@ -440,9 +613,12 @@
 
                 </div>
 
+
                 <div class="card">
 
-                    <h3>🚀 Goal</h3>
+                    <h3>
+                        🚀 Goal
+                    </h3>
 
                     <p>
                         Learn, Build and Improve
@@ -458,11 +634,14 @@
 
 
     <!-- Contact -->
+
     <section id="contact" class="section">
 
         <div class="contact-box">
 
-            <h2>Contact Me</h2>
+            <h2>
+                Contact Me
+            </h2>
 
             <div class="line"></div>
 
@@ -517,6 +696,7 @@
 
 
     <!-- Footer -->
+
     <footer>
 
         <p>
@@ -527,13 +707,41 @@
 
 
     <!-- JavaScript -->
+
     <script>
 
         function goTo(id) {
-            document.getElementById(id).scrollIntoView({
-                behavior: "smooth"
-            });
+
+            document
+                .getElementById(id)
+                .scrollIntoView({
+                    behavior: "smooth"
+                });
+
         }
+
+
+        function toggleTheme() {
+
+            document.body.classList.toggle("dark");
+
+            const button =
+                document.getElementById("themeButton");
+
+            if (
+                document.body.classList.contains("dark")
+            ) {
+
+                button.innerHTML = "☀️ Light";
+
+            } else {
+
+                button.innerHTML = "🌙 Dark";
+
+            }
+
+        }
+
 
         function sendMessage(event) {
 
