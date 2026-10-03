@@ -24,9 +24,7 @@
             transition: 0.3s;
         }
 
-        /* =========================
-           NAVIGATION
-        ========================== */
+        /* NAVIGATION */
 
         nav {
             background: #101827;
@@ -61,6 +59,8 @@
             background: white;
             color: #172033;
             font-size: 14px;
+            border: none;
+            cursor: pointer;
         }
 
         .theme-button:hover {
@@ -68,9 +68,7 @@
             color: white;
         }
 
-        /* =========================
-           HOME
-        ========================== */
+        /* HOME */
 
         .home {
             min-height: 92vh;
@@ -174,9 +172,7 @@
             color: #172033;
         }
 
-        /* =========================
-           GENERAL SECTION
-        ========================== */
+        /* GENERAL SECTION */
 
         .section {
             padding: 85px 20px;
@@ -201,9 +197,7 @@
             border-radius: 5px;
         }
 
-        /* =========================
-           ABOUT
-        ========================== */
+        /* ABOUT */
 
         #about {
             background: #f4f7fb;
@@ -258,9 +252,7 @@
             line-height: 1.5;
         }
 
-        /* =========================
-           PROJECTS
-        ========================== */
+        /* PROJECTS */
 
         #projects {
             background: #eaf1f8;
@@ -326,9 +318,7 @@
             background: #00a8cc;
         }
 
-        /* =========================
-           CONTACT
-        ========================== */
+        /* CONTACT */
 
         #contact {
             background: #f4f7fb;
@@ -401,9 +391,7 @@
             background: #00a8cc;
         }
 
-        /* =========================
-           FOOTER
-        ========================== */
+        /* FOOTER */
 
         footer {
             background: #101827;
@@ -416,9 +404,7 @@
             color: #cbd5e1;
         }
 
-        /* =========================
-           DARK MODE
-        ========================== */
+        /* DARK MODE */
 
         body.dark {
             background: #0f172a;
@@ -480,9 +466,7 @@
             color: #94a3b8;
         }
 
-        /* =========================
-           MOBILE
-        ========================== */
+        /* MOBILE */
 
         @media (max-width: 700px) {
 
@@ -576,16 +560,13 @@
 
 <body>
 
-    <!-- Navigation -->
+    <!-- NAVIGATION -->
 
     <nav>
 
         <a href="#home">Home</a>
-
         <a href="#about">About</a>
-
         <a href="#projects">Projects</a>
-
         <a href="#contact">Contact</a>
 
         <button
@@ -599,7 +580,7 @@
     </nav>
 
 
-    <!-- Home -->
+    <!-- HOME -->
 
     <section id="home" class="home">
 
@@ -641,7 +622,7 @@
     </section>
 
 
-    <!-- About -->
+    <!-- ABOUT -->
 
     <section id="about" class="section">
 
@@ -712,7 +693,7 @@
     </section>
 
 
-    <!-- Projects -->
+    <!-- PROJECTS -->
 
     <section id="projects" class="section">
 
@@ -725,7 +706,6 @@
             <div class="section-line"></div>
 
         </div>
-
 
         <div class="projects-container">
 
@@ -810,7 +790,7 @@
     </section>
 
 
-    <!-- Contact -->
+    <!-- CONTACT -->
 
     <section id="contact" class="section">
 
@@ -843,24 +823,55 @@
 
             </div>
 
-            <form onsubmit="sendMessage(event)">
+
+            <!-- CONTACT FORM -->
+
+            <form
+                action="https://formsubmit.co/YOUR_EMAIL@example.com"
+                method="POST"
+            >
 
                 <input
                     type="text"
+                    name="name"
                     placeholder="Your Name"
                     required
                 >
 
                 <input
                     type="email"
+                    name="email"
                     placeholder="Your Email"
                     required
                 >
 
                 <textarea
+                    name="message"
                     placeholder="Write your message..."
                     required
                 ></textarea>
+
+
+                <!-- FormSubmit settings -->
+
+                <input
+                    type="hidden"
+                    name="_subject"
+                    value="New message from Jihad Website"
+                >
+
+                <input
+                    type="hidden"
+                    name="_captcha"
+                    value="false"
+                >
+
+                <input
+                    type="hidden"
+                    name="_template"
+                    value="table"
+                >
+
 
                 <button
                     type="submit"
@@ -876,7 +887,7 @@
     </section>
 
 
-    <!-- Footer -->
+    <!-- FOOTER -->
 
     <footer>
 
@@ -887,7 +898,7 @@
     </footer>
 
 
-    <!-- JavaScript -->
+    <!-- JAVASCRIPT -->
 
     <script>
 
@@ -920,17 +931,6 @@
                 button.innerHTML = "🌙 Dark";
 
             }
-
-        }
-
-
-        function sendMessage(event) {
-
-            event.preventDefault();
-
-            alert(
-                "Thank you! Your message has been received."
-            );
 
         }
 
