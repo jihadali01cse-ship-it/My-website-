@@ -19,35 +19,42 @@
 
         body {
             font-family: Arial, sans-serif;
-            background: #f4f7fb;
-            color: #222;
+            background: #f3f7fb;
+            color: #1b2430;
         }
 
-        /* Navigation */
+        /* =========================
+           NAVIGATION
+        ========================== */
+
         nav {
-            background: rgba(10, 15, 30, 0.95);
+            background: rgba(12, 18, 32, 0.97);
             padding: 18px 10px;
             text-align: center;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.18);
+            backdrop-filter: blur(10px);
         }
 
         nav a {
-            color: white;
+            color: #ffffff;
             text-decoration: none;
-            margin: 0 14px;
+            margin: 0 15px;
             font-size: 17px;
-            font-weight: 500;
+            font-weight: 600;
             transition: 0.3s;
         }
 
         nav a:hover {
-            color: #00d4ff;
+            color: #38d9ff;
         }
 
-        /* Home */
+        /* =========================
+           HOME
+        ========================== */
+
         .home {
             min-height: 92vh;
             padding: 80px 20px;
@@ -60,37 +67,776 @@
             align-items: center;
 
             background:
-                radial-gradient(circle at top left, rgba(0, 212, 255, 0.35), transparent 35%),
-                radial-gradient(circle at bottom right, rgba(118, 75, 162, 0.5), transparent 40%),
-                linear-gradient(135deg, #141e30, #243b55);
+                radial-gradient(
+                    circle at 15% 20%,
+                    rgba(0, 212, 255, 0.30),
+                    transparent 32%
+                ),
+                radial-gradient(
+                    circle at 85% 80%,
+                    rgba(120, 80, 200, 0.35),
+                    transparent 35%
+                ),
+                linear-gradient(
+                    135deg,
+                    #0f172a,
+                    #172554,
+                    #1e3a5f
+                );
         }
 
         /* Profile Photo */
+
         .profile-photo {
-            width: 170px;
-            height: 170px;
+            width: 175px;
+            height: 175px;
             object-fit: cover;
             border-radius: 50%;
             border: 5px solid white;
             margin-bottom: 25px;
-            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4);
+
+            box-shadow:
+                0 15px 40px rgba(0, 0, 0, 0.45);
+
+            transition: 0.4s;
+        }
+
+        .profile-photo:hover {
+            transform: scale(1.05);
         }
 
         .welcome-text {
-            font-size: 16px;
-            letter-spacing: 2px;
+            font-size: 15px;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            color: #00d4ff;
+            color: #38d9ff;
             margin-bottom: 12px;
             font-weight: bold;
         }
 
         .home h1 {
-            font-size: 52px;
+            font-size: 54px;
             margin-bottom: 18px;
             line-height: 1.2;
         }
 
         .home p {
             font-size: 20px;
-            max-width: 700
+            max-width: 720px;
+            line-height: 1.7;
+            color: #e8eef5;
+            margin-bottom: 10px;
+        }
+
+        /* Home Buttons */
+
+        .home-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 28px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        button {
+            padding: 14px 28px;
+            font-size: 17px;
+            cursor: pointer;
+            border: none;
+            border-radius: 30px;
+            background: #ffffff;
+            color: #172033;
+            transition: 0.3s;
+            font-weight: bold;
+        }
+
+        button:hover {
+            transform: translateY(-4px);
+            background: #38d9ff;
+            color: white;
+
+            box-shadow:
+                0 10px 25px rgba(56, 217, 255, 0.35);
+        }
+
+        .secondary-button {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .secondary-button:hover {
+            background: white;
+            color: #172033;
+        }
+
+        /* =========================
+           GENERAL SECTIONS
+        ========================== */
+
+        .section {
+            padding: 90px 20px;
+        }
+
+        #about {
+            background: #f3f7fb;
+        }
+
+        #contact {
+            background: #eaf1f8;
+        }
+
+        /* =========================
+           ABOUT
+        ========================== */
+
+        .about-box {
+            background: white;
+            width: 90%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 55px 40px;
+
+            border-radius: 24px;
+
+            box-shadow:
+                0 15px 40px rgba(25, 45, 70, 0.12);
+
+            text-align: center;
+        }
+
+        .about-box h1 {
+            font-size: 40px;
+            color: #172033;
+            margin-bottom: 12px;
+        }
+
+        .about-line {
+            width: 75px;
+            height: 4px;
+            background: linear-gradient(
+                90deg,
+                #00a8cc,
+                #38d9ff
+            );
+
+            margin: 0 auto 30px;
+            border-radius: 5px;
+        }
+
+        .about-box > p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #586270;
+            margin-bottom: 15px;
+        }
+
+        /* About Cards */
+
+        .about-cards {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 35px;
+            flex-wrap: wrap;
+        }
+
+        .about-card {
+            width: 230px;
+            padding: 28px 18px;
+
+            background: #f7fbff;
+
+            border-radius: 18px;
+
+            border: 1px solid #e1eaf2;
+
+            box-shadow:
+                0 8px 20px rgba(25, 45, 70, 0.06);
+
+            transition: 0.3s;
+        }
+
+        .about-card:hover {
+            transform: translateY(-7px);
+
+            box-shadow:
+                0 15px 30px rgba(25, 45, 70, 0.13);
+
+            border-color: #9de8f7;
+        }
+
+        .about-card h3 {
+            color: #172033;
+            margin-bottom: 12px;
+            font-size: 19px;
+        }
+
+        .about-card p {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #66717e;
+            margin: 0;
+        }
+
+        /* =========================
+           CONTACT
+        ========================== */
+
+        .contact-box {
+            background: white;
+            width: 90%;
+            max-width: 780px;
+            margin: 0 auto;
+
+            padding: 55px 40px;
+
+            text-align: center;
+
+            border-radius: 24px;
+
+            box-shadow:
+                0 15px 40px rgba(25, 45, 70, 0.12);
+        }
+
+        .contact-box h1 {
+            font-size: 40px;
+            margin-bottom: 12px;
+            color: #172033;
+        }
+
+        .contact-line {
+            width: 75px;
+            height: 4px;
+
+            background: linear-gradient(
+                90deg,
+                #00a8cc,
+                #38d9ff
+            );
+
+            margin: 0 auto 22px;
+            border-radius: 5px;
+        }
+
+        .contact-box > p {
+            font-size: 18px;
+            color: #586270;
+            line-height: 1.7;
+            margin-bottom: 28px;
+        }
+
+        /* Contact Info */
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 28px;
+        }
+
+        .contact-item {
+            background: #f7fbff;
+
+            padding: 15px 22px;
+
+            border-radius: 14px;
+
+            border: 1px solid #e1eaf2;
+
+            font-size: 16px;
+            color: #333;
+
+            transition: 0.3s;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-3px);
+            border-color: #9de8f7;
+            box-shadow: 0 8px 20px rgba(25, 45, 70, 0.08);
+        }
+
+        /* =========================
+           FORM
+        ========================== */
+
+        form {
+            margin-top: 10px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+
+            padding: 15px;
+
+            margin: 8px 0;
+
+            font-size: 16px;
+
+            border: 1px solid #d9e1e8;
+
+            border-radius: 10px;
+
+            outline: none;
+
+            font-family: Arial, sans-serif;
+
+            background: #fbfdff;
+
+            transition: 0.3s;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: #00a8cc;
+
+            box-shadow:
+                0 0 0 3px rgba(0, 168, 204, 0.10);
+        }
+
+        textarea {
+            height: 140px;
+            resize: vertical;
+        }
+
+        .send-button {
+            margin-top: 15px;
+
+            background: #172033;
+            color: white;
+
+            padding: 15px 38px;
+        }
+
+        .send-button:hover {
+            background: #00a8cc;
+        }
+
+        /* =========================
+           FOOTER
+        ========================== */
+
+        footer {
+            background: #0b1120;
+            color: white;
+            text-align: center;
+            padding: 28px 15px;
+        }
+
+        footer p {
+            font-size: 15px;
+            color: #cbd5e1;
+        }
+
+        /* =========================
+           TABLET
+        ========================== */
+
+        @media (max-width: 900px) {
+
+            .home h1 {
+                font-size: 46px;
+            }
+
+            .about-cards {
+                gap: 15px;
+            }
+
+            .about-card {
+                width: 210px;
+            }
+        }
+
+        /* =========================
+           MOBILE
+        ========================== */
+
+        @media (max-width: 600px) {
+
+            nav {
+                padding: 14px 5px;
+            }
+
+            nav a {
+                margin: 0 6px;
+                font-size: 14px;
+            }
+
+            .home {
+                min-height: calc(100vh - 55px);
+                padding: 55px 15px;
+            }
+
+            .profile-photo {
+                width: 135px;
+                height: 135px;
+                border-width: 4px;
+                margin-bottom: 20px;
+            }
+
+            .welcome-text {
+                font-size: 12px;
+                letter-spacing: 1.5px;
+                margin-bottom: 10px;
+            }
+
+            .home h1 {
+                font-size: 34px;
+                line-height: 1.25;
+                margin-bottom: 15px;
+                width: 100%;
+                overflow-wrap: anywhere;
+            }
+
+            .home p {
+                font-size: 16px;
+                line-height: 1.6;
+                width: 100%;
+            }
+
+            .home-buttons {
+                flex-direction: column;
+                width: 100%;
+                max-width: 280px;
+                gap: 12px;
+            }
+
+            button {
+                width: 100%;
+                padding: 13px 20px;
+            }
+
+            .section {
+                padding: 55px 12px;
+            }
+
+            .about-box {
+                width: 100%;
+                padding: 38px 18px;
+                border-radius: 18px;
+            }
+
+            .about-box h1 {
+                font-size: 30px;
+            }
+
+            .about-box > p {
+                font-size: 16px;
+                line-height: 1.7;
+            }
+
+            .about-cards {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .about-card {
+                width: 100%;
+                padding: 24px 15px;
+            }
+
+            .contact-box {
+                width: 100%;
+                padding: 38px 18px;
+                border-radius: 18px;
+            }
+
+            .contact-box h1 {
+                font-size: 30px;
+            }
+
+            .contact-box > p {
+                font-size: 16px;
+                line-height: 1.6;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .contact-item {
+                width: 100%;
+                font-size: 15px;
+            }
+
+            input,
+            textarea {
+                font-size: 16px;
+            }
+
+            .send-button {
+                width: 100%;
+            }
+
+            footer {
+                padding: 22px 10px;
+            }
+
+            footer p {
+                font-size: 13px;
+                line-height: 1.5;
+            }
+        }
+
+        /* =========================
+           VERY SMALL PHONES
+        ========================== */
+
+        @media (max-width: 360px) {
+
+            nav a {
+                margin: 0 4px;
+                font-size: 13px;
+            }
+
+            .home h1 {
+                font-size: 29px;
+            }
+
+            .home p {
+                font-size: 15px;
+            }
+
+            .profile-photo {
+                width: 120px;
+                height: 120px;
+            }
+
+            .about-box h1,
+            .contact-box h1 {
+                font-size: 27px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         NAVIGATION
+    ========================== -->
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+
+    <!-- =========================
+         HOME
+    ========================== -->
+
+    <section id="home" class="home">
+
+        <img
+            src="jihad.jpg"
+            alt="Jihad Ali"
+            class="profile-photo"
+        >
+
+        <div class="welcome-text">
+            Welcome to my website
+        </div>
+
+        <h1>
+            Jihad Website
+        </h1>
+
+        <p>
+            I am a Computer Science Engineering student
+            passionate about learning new technologies,
+            improving my skills and building new things.
+        </p>
+
+        <div class="home-buttons">
+
+            <button
+                onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})"
+            >
+                About Me
+            </button>
+
+            <button
+                class="secondary-button"
+                onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})"
+            >
+                Contact Me
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         ABOUT
+    ========================== -->
+
+    <section id="about" class="section">
+
+        <div class="about-box">
+
+            <h1>
+                About Me
+            </h1>
+
+            <div class="about-line"></div>
+
+            <p>
+                Hello! I am Jihad Ali.
+            </p>
+
+            <p>
+                I am a Computer Science Engineering student
+                interested in learning new technologies
+                and improving my skills.
+            </p>
+
+            <div class="about-cards">
+
+                <div class="about-card">
+
+                    <h3>
+                        🎓 Education
+                    </h3>
+
+                    <p>
+                        Computer Science Engineering Student
+                    </p>
+
+                </div>
+
+
+                <div class="about-card">
+
+                    <h3>
+                        💻 Interest
+                    </h3>
+
+                    <p>
+                        Technology, Coding and Software
+                    </p>
+
+                </div>
+
+
+                <div class="about-card">
+
+                    <h3>
+                        🚀 Goal
+                    </h3>
+
+                    <p>
+                        Learn, Build and Improve
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         CONTACT
+    ========================== -->
+
+    <section id="contact" class="section">
+
+        <div class="contact-box">
+
+            <h1>
+                Contact Me
+            </h1>
+
+            <div class="contact-line"></div>
+
+            <p>
+                Have a question or want to get in touch?
+                Send me a message below.
+            </p>
+
+
+            <div class="contact-info">
+
+                <div class="contact-item">
+                    📧 Email
+                </div>
+
+                <div class="contact-item">
+                    💻 Computer Science
+                </div>
+
+            </div>
+
+
+            <form onsubmit="sendMessage(event)">
+
+                <input
+                    type="text"
+                    placeholder="Your Name"
+                    required
+                >
+
+                <input
+                    type="email"
+                    placeholder="Your Email"
+                    required
+                >
+
+                <textarea
+                    placeholder="Write your message..."
+                    required
+                ></textarea>
+
+                <button
+                    type="submit"
+                    class="send-button"
+                >
+                    Send Message
+                </button>
+
+            </form>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+
+        <p>
+            © 2026 Jihad Website. All rights reserved.
+        </p>
+
+    </footer>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script>
+
+        function sendMessage(event) {
+
+            event.preventDefault();
+
+            alert("Thank you! Your message has been received.");
+
+        }
+
+    </script>
+
+</body>
+</html>
