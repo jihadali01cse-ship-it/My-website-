@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
 
-    <!-- Mobile responsive -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Jihad Ali My Website</title>
@@ -55,6 +54,17 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+        }
+
+        /* Profile Photo */
+        .profile-photo {
+            width: 160px;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 5px solid white;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
         }
 
         .home h1 {
@@ -137,6 +147,11 @@
                 padding: 70px 15px;
             }
 
+            .profile-photo {
+                width: 130px;
+                height: 130px;
+            }
+
             .home h1 {
                 font-size: 34px;
             }
@@ -171,6 +186,8 @@
     <!-- Home -->
     <section id="home" class="home">
 
+        <img src="jihad.jpg" alt="Jihad Ali" class="profile-photo">
+
         <h1>Jihad Ali My Website</h1>
 
         <p>
@@ -178,7 +195,7 @@
             I am a Computer Science Engineering student.
         </p>
 
-        <button onclick="document.getElementById('about').scrollIntoView()">
+        <button onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">
             Explore My Website
         </button>
 
@@ -253,3 +270,4 @@
 
 </body>
 </html>
+     
