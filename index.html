@@ -1007,6 +1007,40 @@ function projectMessage() {
 }
 
 </script>
+ <!-- SIMPLE CHAT BOX -->
+
+<div id="chatBox" class="chat-box">
+
+    <div class="chat-header">
+        💬 Chat
+        <button onclick="closeChat()">×</button>
+    </div>
+
+    <div id="chatMessages" class="chat-messages">
+        <p><b>Bot:</b> Hello! How can I help you?</p>
+    </div>
+
+    <div class="chat-input">
+        <input
+            type="text"
+            id="chatInput"
+            placeholder="Type your message..."
+        >
+
+        <button onclick="sendChat()">
+            Send
+        </button>
+    </div>
+
+</div>
+
+<button
+    id="chatButton"
+    class="chat-button"
+    onclick="openChat()"
+>
+    💬 Chat
+</button>
 
 </body>
 </html>
