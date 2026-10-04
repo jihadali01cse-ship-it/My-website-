@@ -857,12 +857,16 @@
                     type="text"
                     name="name"
                     placeholder="Your Name"
+                    pattern="[A-Za-z] {2,25}"
+                 title="please enter a valid name"
                     required
                 >
              <input
                     type="tel"
                     name="mobile"
                     placeholder="Your mobile number"
+                    pattern="[6-9] [0-9] {9}"
+                    title="please enter a valid 10 digit mobile number"
                     required
                 >
 
@@ -876,6 +880,8 @@
                 <textarea
                     name="message"
                     placeholder="Write your message..."
+                 minlength="5"
+                 maxlength="1000"
                     required
                 ></textarea>
 
