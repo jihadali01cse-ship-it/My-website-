@@ -1041,6 +1041,60 @@ function projectMessage() {
 >
     💬 Chat
 </button>
+ <script>
+
+function openChat() {
+    document.getElementById("chatBox").style.display = "block";
+}
+
+function closeChat() {
+    document.getElementById("chatBox").style.display = "none";
+}
+
+function sendChat() {
+
+    const input = document.getElementById("chatInput");
+    const message = input.value.trim();
+
+    if (message === "") {
+        return;
+    }
+
+    const messages = document.getElementById("chatMessages");
+
+    messages.innerHTML +=
+        "<p><b>You:</b> " + message + "</p>";
+
+    let reply = "Thanks for your message!";
+
+    if (message.toLowerCase().includes("hello") ||
+        message.toLowerCase().includes("hi")) {
+
+        reply = "Hello! 👋 Welcome to Jihad's website.";
+
+    } else if (message.toLowerCase().includes("name")) {
+
+        reply = "My name is Jihad Ali.";
+
+    } else if (message.toLowerCase().includes("website")) {
+
+        reply = "This is Jihad's personal portfolio website.";
+
+    } else if (message.toLowerCase().includes("project")) {
+
+        reply = "You can check the Projects section of this website.";
+
+    }
+
+    messages.innerHTML +=
+        "<p><b>Bot:</b> " + reply + "</p>";
+
+    input.value = "";
+
+    messages.scrollTop = messages.scrollHeight;
+}
+
+</script>
 
 </body>
 </html>
