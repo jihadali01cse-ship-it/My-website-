@@ -852,38 +852,34 @@
                 method="POST"
                 onsubmit="showThankYou()"
             >
+                 <input
+                        type="text"
+                        name="name"
+                        placeholder="Your Name"
+                        required    
+            >
 
-                <input
-                    type="text"
-                    name="name"
-                    placeholder="Your Name
-                    required
-                >
-             <input
-                    type="tel"
-                    name="mobile"
-                    placeholder="Your mobile number"
-                    pattern="[6-9] [0-9] {9}"
-                    title="please enter a valid 10 digit mobile number"
-                    required
-                >
+                 <input
+                       type="email"
+                       name="email"
+                       placeholder="Your Email"
+                       required 
+            >
 
-                <input
-                    type="email"
-                    name="email"
-                    placeholder="Your Email"
-                    required
-                >
+                  <input
+                       type="tel"
+                       name="mobile"
+                       placeholder="Your Mobile Number"
+                       required
+            >
 
-                <textarea
-                    name="message"
-                    placeholder="Write your message..."
-                 minlength="5"
-                 maxlength="1000"
-                    required
-                ></textarea>
-
-
+                 <textarea
+                       name="message"
+                       placeholder="Write your message..."
+                       required
+                  
+                 ></textarea>
+              
                 <input
                     type="hidden"
                     name="_subject"
