@@ -845,7 +845,7 @@
                 </div> 
              
                 <div class="info">
-                       mobile: 8373042310
+                       Mobile: 8373042310
               
             </div>
 
@@ -937,53 +937,33 @@
 
     </footer>
 
-<!-- JAVASCRIPT -->
+ <!-- JAVASCRIPT -->
 
 <script>
 
-    function goTo(id) {
+function goTo(id) {
+    document.getElementById(id).scrollIntoView({
+        behavior: "smooth"
+    });
+}
 
-        document
-            .getElementById(id)
-            .scrollIntoView({
-                behavior: "smooth"
-            });
+function toggleTheme() {
+    document.body.classList.toggle("dark");
 
+    const button = document.getElementById("themeButton");
+
+    if (document.body.classList.contains("dark")) {
+        button.innerHTML = "☀️ Light";
+    } else {
+        button.innerHTML = "🌙 Dark";
     }
+}
 
-
-    function toggleTheme() {
-
-        document.body.classList.toggle("dark");
-
-        const button =
-            document.getElementById("themeButton");
-
-        if (
-            document.body.classList.contains("dark")
-        ) {
-
-            button.innerHTML = "☀️ Light";
-
-        } else {
-
-            button.innerHTML = "🌙 Dark";
-
-        }
-
-    }
-
-
-    function projectMessage() {
-
-        alert(
-            "This project will be available soon."
-        );
-
-    }
+function projectMessage() {
+    alert("This project will be available soon.");
+}
 
 </script>
 
 </body>
 </html>
-    
