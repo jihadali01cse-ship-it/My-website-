@@ -590,6 +590,7 @@
         <a href="#about">About</a>
         <a href="#achievements">Achievements</a>
         <a href="#projects">Projects</a>
+        <a href="#ai-assistant">🤖 AI Assistant</a>
         <a href="#contact">Contact</a>
 
         <button
@@ -979,40 +980,58 @@
         </p>
 
     </footer>
-<!-- AI CHAT BOX -->
+ <!-- AI ASSISTANT -->
 
-<div id="chatBox" class="chat-box">
+<section id="ai-assistant" class="ai-section">
 
-    <div class="chat-header">
-        🤖 Jihad AI Assistant
-        <button onclick="closeChat()">×</button>
+    <div class="section-title">
+        <h2>🤖 Jihad AI Assistant</h2>
+        <div class="section-line"></div>
+        <p>Ask me anything about Jihad, his projects, skills and website.</p>
     </div>
 
-    <div id="chatMessages" class="chat-messages">
-        <p><b>Jihad AI Assistant:</b> Hello! How can I help you?</p>
+    <div class="ai-chat-container">
+
+        <div class="ai-header">
+            <div class="ai-avatar">🤖</div>
+
+            <div>
+                <h3>Jihad AI Assistant</h3>
+                <span>● Online Assistant</span>
+            </div>
+        </div>
+
+        <div id="chatMessages" class="ai-messages">
+
+            <div class="ai-message">
+                <div class="message-avatar">🤖</div>
+                <div class="message-bubble">
+                    Hello! 👋<br>
+                    I'm Jihad AI Assistant.<br>
+                    How can I help you today?
+                </div>
+            </div>
+
+        </div>
+
+        <div class="ai-input-area">
+
+            <input
+                type="text"
+                id="chatInput"
+                placeholder="Ask me anything..."
+                autocomplete="off"
+            >
+
+            <button onclick="sendChat()" id="sendChatButton">
+                Send ➤
+            </button>
+
+        </div>
+
     </div>
 
-    <div class="chat-input">
-        <input
-            type="text"
-            id="chatInput"
-            placeholder="Ask me anything..."
-        >
-
-        <button onclick="sendChat()">
-            Send
-        </button>
-    </div>
-
-</div>
-
-<button
-    id="chatButton"
-    class="chat-button"
-    onclick="openChat()"
->
-    🤖 Chat
-</button>
+</section>
  <!-- JAVASCRIPT -->
 
 <script>
