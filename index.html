@@ -804,6 +804,114 @@ body.dark .ai-input-area input {
 body.dark .ai-input-area input::placeholder {
     color: #94a3b8;
 }
+     /* =========================
+   THEMES
+========================= */
+
+.themes-section {
+    background: #f4f7fb;
+}
+
+.themes-section .section-title p {
+    margin-top: 15px;
+    color: #64748b;
+    font-size: 16px;
+}
+
+.themes-container {
+    max-width: 1000px;
+    margin: auto;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+.theme-card {
+    background: white;
+    padding: 30px 22px;
+    border-radius: 18px;
+    text-align: center;
+    border: 1px solid #e0e8ef;
+
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+
+    transition: 0.3s;
+}
+
+.theme-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.13);
+}
+
+.theme-icon {
+    font-size: 50px;
+    margin-bottom: 15px;
+}
+
+.theme-card h3 {
+    color: #172033;
+    margin-bottom: 12px;
+    font-size: 21px;
+}
+
+.theme-card p {
+    color: #666;
+    line-height: 1.6;
+    font-size: 15px;
+}
+
+.theme-card button {
+    margin-top: 20px;
+    padding: 10px 22px;
+    background: #172033;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.theme-card button:hover {
+    background: #00a8cc;
+}
+
+
+/* DARK MODE */
+
+body.dark .themes-section {
+    background: #0f172a;
+}
+
+body.dark .themes-section .section-title p {
+    color: #cbd5e1;
+}
+
+body.dark .theme-card {
+    background: #1e293b;
+    color: #e5e7eb;
+    border-color: #334155;
+    box-shadow: 0 12px 35px rgba(0,0,0,0.35);
+}
+
+body.dark .theme-card h3 {
+    color: white;
+}
+
+body.dark .theme-card p {
+    color: #cbd5e1;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+    .themes-container {
+        grid-template-columns: 1fr;
+    }
+
+}
     </style>
 </head>
 
@@ -818,6 +926,7 @@ body.dark .ai-input-area input::placeholder {
         <a href="#achievements">Achievements</a>
         <a href="#projects">Projects</a>
         <a href="#ai-assistant">🤖 AI Assistant</a>
+        <a href="#themes">🎨 Themes</a>
         <a href="#contact">Contact</a>
 
         <button
@@ -1080,7 +1189,79 @@ body.dark .ai-input-area input::placeholder {
         </div>
 
     </section>
+<!-- THEMES -->
 
+<section id="themes" class="section themes-section">
+
+    <div class="section-title">
+
+        <h2>
+            🎨 Themes
+        </h2>
+
+        <div class="section-line"></div>
+
+        <p>
+            Explore beautiful images from different categories.
+        </p>
+
+    </div>
+
+
+    <div class="themes-container">
+
+
+        <div class="theme-card">
+            <div class="theme-icon">🌍</div>
+            <h3>World</h3>
+            <p>Beautiful places and amazing views.</p>
+            <button>Explore</button>
+        </div>
+
+
+        <div class="theme-card">
+            <div class="theme-icon">🎮</div>
+            <h3>Gaming</h3>
+            <p>Gaming wallpapers and images.</p>
+            <button>Explore</button>
+        </div>
+
+
+        <div class="theme-card">
+            <div class="theme-icon">🚗</div>
+            <h3>Cars</h3>
+            <p>Beautiful cars and automotive images.</p>
+            <button>Explore</button>
+        </div>
+
+
+        <div class="theme-card">
+            <div class="theme-icon">🌌</div>
+            <h3>Space</h3>
+            <p>Space, planets and universe images.</p>
+            <button>Explore</button>
+        </div>
+
+
+        <div class="theme-card">
+            <div class="theme-icon">🌿</div>
+            <h3>Nature</h3>
+            <p>Beautiful nature and landscape images.</p>
+            <button>Explore</button>
+        </div>
+
+
+        <div class="theme-card">
+            <div class="theme-icon">💻</div>
+            <h3>Technology</h3>
+            <p>Technology and computer related images.</p>
+            <button>Explore</button>
+        </div>
+
+
+    </div>
+
+</section>
 
     <!-- CONTACT -->
 
