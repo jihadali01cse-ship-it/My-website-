@@ -912,6 +912,57 @@ body.dark .theme-card p {
     }
 
 }
+     /* MOBILE NAVIGATION FIX */
+nav {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    padding: 12px 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+nav a,
+nav .theme-button {
+    box-sizing: border-box;
+    max-width: 100%;
+    white-space: normal;
+}
+
+nav a {
+    font-size: 14px;
+    padding: 8px 10px;
+}
+
+nav .theme-button {
+    padding: 9px 12px;
+}
+
+@media (max-width: 600px) {
+    nav {
+        gap: 6px;
+        padding: 10px 6px;
+    }
+
+    nav a {
+        font-size: 12px;
+        padding: 8px 7px;
+    }
+
+    nav .theme-button {
+        font-size: 12px;
+        padding: 8px 10px;
+    }
+}
+
+html,
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
     </style>
 </head>
 
