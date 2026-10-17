@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jihad Admin</title>
+    <title>Jihad Admin Login</title>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -15,20 +15,20 @@
         body {
             margin: 0;
             min-height: 100vh;
+            padding: 20px;
             font-family: Arial, sans-serif;
             background: linear-gradient(135deg, #172033, #00a8cc);
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
         }
 
         .admin-box {
             width: 100%;
             max-width: 430px;
-            background: white;
             padding: 35px;
             border-radius: 20px;
+            background: white;
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
         }
 
@@ -41,7 +41,7 @@
         .subtitle {
             text-align: center;
             color: #777;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
         label {
@@ -57,11 +57,10 @@
             border: 1px solid #d5dce5;
             border-radius: 10px;
             font-size: 15px;
-            outline: none;
         }
 
         input:focus {
-            border-color: #00a8cc;
+            outline: 2px solid #00a8cc;
         }
 
         button {
@@ -81,18 +80,33 @@
             background: #00a8cc;
         }
 
+        button:disabled {
+            opacity: 0.6;
+            cursor: wait;
+        }
+
+        .link-button {
+            display: block;
+            margin-top: 18px;
+            text-align: center;
+            color: #008bab;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
         #message {
             text-align: center;
             margin-top: 18px;
             font-weight: bold;
             overflow-wrap: anywhere;
+            line-height: 1.5;
         }
 
         .back {
             display: block;
             text-align: center;
             margin-top: 20px;
-            color: #00a8cc;
+            color: #008bab;
             text-decoration: none;
         }
     </style>
@@ -101,11 +115,10 @@
 <body>
     <div class="admin-box">
         <h1>🔐 Admin Login</h1>
-
         <p class="subtitle">Jihad Website</p>
 
         <form id="loginForm">
-            <label for="email">Email</label>
+            <label for="email">Admin Email</label>
             <input
                 type="email"
                 id="email"
@@ -126,6 +139,10 @@
             <button type="submit" id="loginButton">Login</button>
         </form>
 
+        <a href="#" id="forgotLink" class="link-button">
+            Forgot Password?
+        </a>
+
         <p id="message" role="status" aria-live="polite"></p>
 
         <a href="./index.html" class="back">← Back to Website</a>
@@ -145,50 +162,116 @@
 
         const loginForm = document.getElementById("loginForm");
         const loginButton = document.getElementById("loginButton");
+        const forgotLink = document.getElementById("forgotLink");
         const message = document.getElementById("message");
+
+        function showMessage(text, color = "#555") {
+            message.style.color = color;
+            message.textContent = text;
+        }
 
         loginForm.addEventListener("submit", async function (event) {
             event.preventDefault();
 
-            const email = document.getElementById("email").value.trim();
-            const password = document.getElementById("password").value;
+            const email =
+                document.getElementById("email").value.trim();
 
-            message.style.color = "#555";
-            message.textContent = "Logging in...";
+            const password =
+                document.getElementById("password").value;
+
             loginButton.disabled = true;
+            showMessage("Logging in...");
 
             try {
                 const { data, error } =
                     await supabaseClient.auth.signInWithPassword({
-                        email: email,
-                        password: password
+                        email,
+                        password
                     });
 
                 if (error) {
-                    message.style.color = "red";
-                    message.textContent = error.message;
+                    showMessage(error.message, "red");
                     return;
                 }
 
                 if (!data.session) {
-                    message.style.color = "red";
-                    message.textContent = "Login session could not be created.";
+                    showMessage(
+                        "Login session could not be created.",
+                        "red"
+                    );
                     return;
                 }
 
-                message.style.color = "green";
-                message.textContent = "Login successful!";
+                showMessage("Login successful!", "green");
 
-                setTimeout(function () {
+                setTimeout(() => {
                     window.location.href = "./admin-upload.html";
                 }, 1000);
 
             } catch (error) {
-                message.style.color = "red";
-                message.textContent =
-                    "Connection error. Please check your internet and try again.";
+                showMessage(
+                    "Connection error. Please check your internet.",
+                    "red"
+                );
             } finally {
                 loginButton.disabled = false;
+            }
+        });
+
+        forgotLink.addEventListener("click", async function (event) {
+            event.preventDefault();
+
+            const email =
+                document.getElementById("email").value.trim();
+
+            if (!email) {
+                showMessage(
+                    "Please enter your admin email first.",
+                    "red"
+                );
+                document.getElementById("email").focus();
+                return;
+            }
+
+            forgotLink.style.pointerEvents = "none";
+            showMessage("Sending password reset email...");
+
+            try {
+                const redirectUrl =
+                    window.location.origin +
+                    window.location.pathname.replace(
+                        /admin\.html$/i,
+                        "reset-password.html"
+                    );
+
+                const { error } =
+                    await supabaseClient.auth.resetPasswordForEmail(
+                        email,
+                        {
+                            redirectTo: redirectUrl
+                        }
+                    );
+
+                if (error) {
+                    showMessage(
+                        "Reset email error: " + error.message,
+                        "red"
+                    );
+                    return;
+                }
+
+                showMessage(
+                    "If the email is registered, a password reset link has been sent. Check your inbox and spam folder.",
+                    "green"
+                );
+
+            } catch (error) {
+                showMessage(
+                    "Network error. Please try again.",
+                    "red"
+                );
+            } finally {
+                forgotLink.style.pointerEvents = "auto";
             }
         });
     </script>
