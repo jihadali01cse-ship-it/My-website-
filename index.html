@@ -1966,7 +1966,262 @@ document.getElementById("chatInput").addEventListener(
 
     }
 );
+/* =========================
+   SUPABASE IMAGE GALLERY
+========================= */
 
+const SUPABASE_URL =
+    "https://ylsvipyztljtblfuoxhd.supabase.co";
+
+const SUPABASE_KEY =
+    "sb_publishable_Gj7-cAMpBFMNJithr1HIhA_ifec4CQW";
+
+let supabaseClient = null;
+let allThemeImages = [];
+let currentCategory = "";
+let currentImageId = null;
+
+const likedImagesKey = "jihadWebsiteLikedImages";
+
+function getLikedImages() {
+    try {
+        return JSON.parse(localStorage.getItem(likedImagesKey) || "[]");
+    } catch {
+        return [];
+    }
+}
+
+function isLiked(id) {
+    return getLikedImages().includes(String(id));
+}
+
+function toggleLike(id) {
+    if (id === null || id === undefined) return;
+
+    const key = String(id);
+    let liked = getLikedImages();
+
+    if (liked.includes(key)) {
+        liked = liked.filter(item => item !== key);
+    } else {
+        liked.push(key);
+    }
+
+    localStorage.setItem(likedImagesKey, JSON.stringify(liked));
+
+    renderGallery();
+
+    if (currentImageId !== null) {
+        updateModalLikeButton();
+    }
+}
+
+function getImageId(image, index) {
+    return String(image.id ?? image.image_url ?? index);
+}
+
+function openCategory(category) {
+    currentCategory = category;
+
+    document.getElementById("galleryArea").classList.add("visible");
+    document.getElementById("galleryTitle").textContent =
+        "🖼️ " + category + " Wallpapers";
+
+    document.getElementById("galleryArea").scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+
+    renderGallery();
+}
+
+function closeGallery() {
+    document.getElementById("galleryArea").classList.remove("visible");
+    document.getElementById("themes").scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+}
+
+async function loadThemeImages() {
+    const status = document.getElementById("galleryStatus");
+
+    status.textContent = "Loading images...";
+
+    try {
+        if (!window.supabase) {
+            throw new Error("Supabase library could not be loaded.");
+        }
+
+        supabaseClient = window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_KEY
+        );
+
+        const { data, error } = await supabaseClient
+            .from("themes_image")
+            .select("*");
+
+        if (error) throw error;
+
+        allThemeImages = data || [];
+
+        if (currentCategory) {
+            renderGallery();
+        } else {
+            status.textContent =
+                "Choose a category above to explore images.";
+        }
+
+    } catch (error) {
+        console.error("Supabase image loading error:", error);
+
+        status.textContent =
+            "Images could not be loaded. Check your table name, " +
+            "Supabase permissions and internet connection.";
+    }
+}
+
+function renderGallery() {
+    const gallery = document.getElementById("imageGallery");
+    const status = document.getElementById("galleryStatus");
+
+    gallery.innerHTML = "";
+
+    const filteredImages = allThemeImages.filter(image =>
+        String(image.category || "").trim().toLowerCase() ===
+        currentCategory.trim().toLowerCase()
+    );
+
+    if (filteredImages.length === 0) {
+        status.textContent = allThemeImages.length === 0
+            ? "No images found. Upload images from your admin page."
+            : "No images in this category yet.";
+
+        return;
+    }
+
+    status.textContent = filteredImages.length + " image(s) found.";
+
+    filteredImages.forEach(image => {
+        if (!image.image_url) return;
+
+        const id = getImageId(image, allThemeImages.indexOf(image));
+        const title = image.title || currentCategory + " Wallpaper";
+        const liked = isLiked(id);
+
+        const item = document.createElement("article");
+        item.className = "gallery-item";
+
+        const img = document.createElement("img");
+        img.className = "gallery-thumb";
+        img.src = image.image_url;
+        img.alt = title;
+        img.loading = "lazy";
+
+        img.addEventListener("click", () => openImageModal(image, id, title));
+
+        img.addEventListener("error", () => {
+            img.alt = "Image failed to load";
+            img.style.minHeight = "120px";
+        });
+
+        const info = document.createElement("div");
+        info.className = "gallery-item-info";
+
+        const heading = document.createElement("h3");
+        heading.textContent = title;
+
+        const actions = document.createElement("div");
+        actions.className = "gallery-actions";
+
+        const likeButton = document.createElement("button");
+        likeButton.className = liked ? "liked" : "";
+        likeButton.textContent = liked ? "❤️ Liked" : "🤍 Like";
+        likeButton.addEventListener("click", () => toggleLike(id));
+
+        const downloadLink = document.createElement("a");
+        downloadLink.href = image.image_url;
+        downloadLink.target = "_blank";
+        downloadLink.rel = "noopener noreferrer";
+        downloadLink.download = "";
+        downloadLink.textContent = "⬇️ Download";
+
+        actions.append(likeButton, downloadLink);
+        info.append(heading, actions);
+        item.append(img, info);
+        gallery.appendChild(item);
+    });
+}
+
+function openImageModal(image, id, title) {
+    currentImageId = id;
+
+    document.getElementById("largeImage").src = image.image_url;
+    document.getElementById("largeImage").alt = title;
+    document.getElementById("largeImageTitle").textContent = title;
+
+    updateModalLikeButton();
+
+    document.getElementById("imageModal").classList.add("open");
+    document.body.style.overflow = "hidden";
+}
+
+function updateModalLikeButton() {
+    const button = document.getElementById("modalLikeButton");
+
+    button.textContent = isLiked(currentImageId)
+        ? "❤️ Liked"
+        : "🤍 Like";
+
+    button.classList.toggle("liked", isLiked(currentImageId));
+}
+
+function closeImageModal() {
+    document.getElementById("imageModal").classList.remove("open");
+    document.getElementById("largeImage").src = "";
+    document.body.style.overflow = "";
+    currentImageId = null;
+}
+
+function downloadCurrentImage() {
+    const image = document.getElementById("largeImage");
+
+    if (!image.src) return;
+
+    const link = document.createElement("a");
+    link.href = image.src;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.download = "jihad-wallpaper";
+
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+}
+
+document.addEventListener("keydown", event => {
+    if (event.key === "Escape") {
+        closeImageModal();
+    }
+});
+
+/* Load Supabase library and images */
+(function loadSupabaseLibrary() {
+    const script = document.createElement("script");
+
+    script.src =
+        "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";
+
+    script.onload = loadThemeImages;
+
+    script.onerror = () => {
+        document.getElementById("galleryStatus").textContent =
+            "Supabase library failed to load.";
+    };
+
+    document.head.appendChild(script);
+})();
 </script>
 </body>
 </html>
