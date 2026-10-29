@@ -963,6 +963,225 @@ body {
     max-width: 100%;
     overflow-x: hidden;
 }
+     /* IMAGE GALLERY */
+.gallery-area {
+    display: none;
+    max-width: 1100px;
+    margin: 45px auto 0;
+}
+
+.gallery-area.visible {
+    display: block;
+}
+
+.gallery-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.gallery-heading h2 {
+    color: #172033;
+    font-size: 26px;
+}
+
+.gallery-back {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 20px;
+    background: #172033;
+    color: white;
+    cursor: pointer;
+}
+
+.gallery-status {
+    text-align: center;
+    padding: 18px;
+    color: #64748b;
+}
+
+.image-gallery {
+    columns: 3;
+    column-gap: 18px;
+}
+
+.gallery-item {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 18px;
+    overflow: hidden;
+    border-radius: 14px;
+    background: white;
+    box-shadow: 0 5px 18px rgba(0,0,0,.10);
+    break-inside: avoid;
+}
+
+.gallery-thumb {
+    display: block;
+    width: 100%;
+    max-height: 350px;
+    object-fit: cover;
+    cursor: zoom-in;
+    transition: transform .3s;
+}
+
+.gallery-thumb:hover {
+    transform: scale(1.04);
+}
+
+.gallery-item-info {
+    padding: 12px;
+}
+
+.gallery-item-info h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+    overflow-wrap: anywhere;
+}
+
+.gallery-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.gallery-actions button,
+.gallery-actions a {
+    flex: 1;
+    text-align: center;
+    padding: 9px 6px;
+    border: none;
+    border-radius: 9px;
+    background: #172033;
+    color: white;
+    text-decoration: none;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.gallery-actions button.liked,
+.modal-actions button.liked {
+    background: #d92658;
+}
+
+.gallery-actions a:hover,
+.gallery-actions button:hover {
+    background: #00a8cc;
+}
+
+.image-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 5000;
+    background: rgba(0,0,0,.92);
+    padding: 55px 15px 20px;
+    overflow-y: auto;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-modal.open {
+    display: flex;
+}
+
+.modal-content {
+    width: 100%;
+    max-width: 850px;
+    text-align: center;
+    color: white;
+}
+
+.modal-content img {
+    max-width: 100%;
+    max-height: 70vh;
+    object-fit: contain;
+    border-radius: 10px;
+}
+
+.modal-content h3 {
+    margin: 15px 0;
+    overflow-wrap: anywhere;
+}
+
+.modal-close {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    border: none;
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    background: white;
+    color: #111;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.modal-actions button {
+    padding: 12px 22px;
+    border: none;
+    border-radius: 25px;
+    background: #00a8cc;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+body.dark .gallery-heading h2 {
+    color: white;
+}
+
+body.dark .gallery-item {
+    background: #1e293b;
+    color: white;
+}
+
+body.dark .gallery-item-info h3 {
+    color: white;
+}
+
+@media (max-width: 700px) {
+    .image-gallery {
+        columns: 2;
+        column-gap: 10px;
+    }
+
+    .gallery-item {
+        margin-bottom: 10px;
+    }
+
+    .gallery-item-info {
+        padding: 8px;
+    }
+
+    .gallery-actions {
+        flex-direction: column;
+    }
+
+    .gallery-actions button,
+    .gallery-actions a {
+        width: 100%;
+    }
+
+    .gallery-heading h2 {
+        font-size: 21px;
+    }
+}
+
+@media (max-width: 380px) {
+    .image-gallery {
+        columns: 1;
+    }
+}
     </style>
 </head>
 
@@ -1241,80 +1460,87 @@ body {
         </div>
 
     </section>
-<!-- THEMES -->
-
+ <!-- THEMES GALLERY -->
 <section id="themes" class="section themes-section">
-
     <div class="section-title">
-
-        <h2>
-            🎨 Themes
-        </h2>
-
+        <h2>🎨 Themes Gallery</h2>
         <div class="section-line"></div>
-
-        <p>
-            Explore beautiful images from different categories.
-        </p>
-
+        <p>Explore and download beautiful wallpapers.</p>
     </div>
 
-
     <div class="themes-container">
-
-
         <div class="theme-card">
             <div class="theme-icon">🌍</div>
             <h3>World</h3>
             <p>Beautiful places and amazing views.</p>
-            <button>Explore</button>
+            <button onclick="openCategory('World')">Explore</button>
         </div>
-
 
         <div class="theme-card">
             <div class="theme-icon">🎮</div>
             <h3>Gaming</h3>
             <p>Gaming wallpapers and images.</p>
-            <button>Explore</button>
+            <button onclick="openCategory('Gaming')">Explore</button>
         </div>
-
 
         <div class="theme-card">
             <div class="theme-icon">🚗</div>
             <h3>Cars</h3>
             <p>Beautiful cars and automotive images.</p>
-            <button>Explore</button>
+            <button onclick="openCategory('Cars')">Explore</button>
         </div>
-
 
         <div class="theme-card">
             <div class="theme-icon">🌌</div>
             <h3>Space</h3>
             <p>Space, planets and universe images.</p>
-            <button>Explore</button>
+            <button onclick="openCategory('Space')">Explore</button>
         </div>
-
 
         <div class="theme-card">
             <div class="theme-icon">🌿</div>
             <h3>Nature</h3>
             <p>Beautiful nature and landscape images.</p>
-            <button>Explore</button>
+            <button onclick="openCategory('Nature')">Explore</button>
         </div>
-
 
         <div class="theme-card">
             <div class="theme-icon">💻</div>
             <h3>Technology</h3>
-            <p>Technology and computer related images.</p>
-            <button>Explore</button>
+            <p>Technology and computer images.</p>
+            <button onclick="openCategory('Technology')">Explore</button>
         </div>
-
-
     </div>
 
+    <div id="galleryArea" class="gallery-area">
+        <div class="gallery-heading">
+            <h2 id="galleryTitle">🖼️ Image Gallery</h2>
+            <button class="gallery-back" onclick="closeGallery()">← Categories</button>
+        </div>
+
+        <p id="galleryStatus" class="gallery-status">
+            Select a category to view images.
+        </p>
+
+        <div id="imageGallery" class="image-gallery"></div>
+    </div>
 </section>
 
+<!-- LARGE IMAGE VIEWER -->
+<div id="imageModal" class="image-modal"
+     onclick="if(event.target === this) closeImageModal()">
+    <button class="modal-close" onclick="closeImageModal()">✕</button>
+    <div class="modal-content">
+        <img id="largeImage" src="" alt="Large wallpaper">
+        <h3 id="largeImageTitle"></h3>
+        <div class="modal-actions">
+            <button id="modalLikeButton" onclick="toggleLike(currentImageId)">
+                ❤️ Like
+            </button>
+            <button onclick="downloadCurrentImage()">⬇️ Download</button>
+        </div>
+    </div>
+</div>
     <!-- CONTACT -->
 
     <section id="contact" class="section">
