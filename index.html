@@ -2059,7 +2059,7 @@ async function loadThemeImages() {
         );
 
         const { data, error } = await supabaseClient
-            .from("themes_image")
+            .from("themes_images")
             .select("*");
 
         if (error) throw error;
