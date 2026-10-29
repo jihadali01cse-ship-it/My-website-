@@ -292,7 +292,7 @@ async function uploadImage() {
         /* SAVE IMAGE INFORMATION */
         const { error: databaseError } =
             await supabaseClient
-                .from("themes_images")
+                .from("themes_image")
                 .insert([{
                     title: title,
                     category: category,
