@@ -2142,9 +2142,7 @@ function renderGallery() {
 
         const downloadLink = document.createElement("a");
         downloadLink.href = image.image_url;
-        downloadLink.target = "_blank";
-        downloadLink.rel = "noopener noreferrer";
-        downloadLink.download = "";
+        downloadLink.download = "image.jpg";
         downloadLink.textContent = "⬇️ Download";
 
         actions.append(likeButton, downloadLink);
