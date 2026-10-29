@@ -1,9 +1,8 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Jihad Admin Upload</title>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -49,8 +48,7 @@
             color: #172033;
         }
 
-        input,
-        select {
+        input, select {
             width: 100%;
             padding: 13px;
             border: 1px solid #d5dce5;
@@ -59,44 +57,45 @@
             outline: none;
         }
 
-        input:focus,
-        select:focus {
+        input:focus, select:focus {
             border-color: #00a8cc;
         }
 
-        .upload-btn {
+        button {
             width: 100%;
-            margin-top: 25px;
             padding: 14px;
             border: none;
             border-radius: 10px;
-            background: #172033;
             color: white;
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
         }
 
+        .upload-btn {
+            margin-top: 25px;
+            background: #172033;
+        }
+
         .upload-btn:hover {
             background: #00a8cc;
         }
 
+        .upload-btn:disabled {
+            opacity: 0.6;
+            cursor: wait;
+        }
+
         .logout-btn {
-            width: 100%;
             margin-top: 12px;
-            padding: 12px;
-            border: none;
-            border-radius: 10px;
             background: #e53935;
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
         }
 
         #message {
             text-align: center;
             margin-top: 18px;
             font-weight: bold;
+            overflow-wrap: anywhere;
         }
 
         .back {
@@ -119,26 +118,15 @@
 </head>
 
 <body>
-
 <div class="upload-box">
-
     <h1>🖼️ Admin Upload</h1>
+    <p class="subtitle">Jihad Website Themes</p>
 
-    <p class="subtitle">
-        Jihad Website Themes
-    </p>
+    <label for="title">Image Title</label>
+    <input type="text" id="title" placeholder="Enter image title" required>
 
-    <label>Image Title</label>
-
-    <input
-        type="text"
-        id="title"
-        placeholder="Enter image title"
-    >
-
-    <label>Category</label>
-
-    <select id="category">
+    <label for="category">Category</label>
+    <select id="category" required>
         <option value="">Select Category</option>
         <option value="World">🌍 World</option>
         <option value="Gaming">🎮 Gaming</option>
@@ -148,177 +136,160 @@
         <option value="Technology">💻 Technology</option>
     </select>
 
-    <label>Select Image</label>
-
+    <label for="imageFile">Select Image</label>
     <input
         type="file"
         id="imageFile"
         accept="image/jpeg,image/png,image/webp"
         onchange="previewImage()"
+        required
     >
 
-    <img id="preview">
+    <img id="preview" alt="Selected image preview">
 
-    <button class="upload-btn" onclick="uploadImage()">
+    <button class="upload-btn" id="uploadButton" onclick="uploadImage()">
         ⬆️ Upload Image
     </button>
 
-    <button class="logout-btn" onclick="logoutAdmin()">
-        Logout
-    </button>
+    <button class="logout-btn" onclick="logoutAdmin()">Logout</button>
 
-    <p id="message"></p>
+    <p id="message" role="status" aria-live="polite"></p>
 
-    <a href="index.html" class="back">
-        ← Back to Website
-    </a>
-
+    <a href="./index.html" class="back">← Back to Website</a>
 </div>
 
-
 <script>
-
-/* ================================
-   SUPABASE SETTINGS
-   ================================ */
-
-const SUPABASE_URL = " https://ylsvipyztljtblfuoxhd.supabase.co";
+/* SUPABASE SETTINGS */
+const SUPABASE_URL =
+    "https://ylsvipyztljtblfuoxhd.supabase.co";
 
 const SUPABASE_PUBLISHABLE_KEY =
-    " sb_publishable_Gj7-cAMpBFMNJithr1HIhA_ifec4CQW";
+    "sb_publishable_Gj7-cAMpBFMNJithr1HIhA_ifec4CQW";
 
-
-/* ================================
-   SUPABASE CONNECTION
-   ================================ */
+const BUCKET_NAME = "themes-images";
 
 const supabaseClient = window.supabase.createClient(
     SUPABASE_URL,
     SUPABASE_PUBLISHABLE_KEY
 );
 
+let uploadInProgress = false;
 
-/* ================================
-   CHECK LOGIN
-   ================================ */
-
+/* CHECK LOGIN */
 async function checkLogin() {
+    const message = document.getElementById("message");
 
-    const { data } =
-        await supabaseClient.auth.getSession();
+    try {
+        const { data, error } =
+            await supabaseClient.auth.getSession();
 
-    if (!data.session) {
-        window.location.href = "admin.html";
+        if (error) throw error;
+
+        if (!data.session) {
+            window.location.replace("./admin.html");
+            return;
+        }
+    } catch (error) {
+        console.error("Session check error:", error);
+        message.style.color = "red";
+        message.textContent =
+            "Could not check login. Refresh the page and try again.";
     }
 }
 
 checkLogin();
 
-
-/* ================================
-   IMAGE PREVIEW
-   ================================ */
-
+/* IMAGE PREVIEW */
 function previewImage() {
-
-    const file =
-        document.getElementById("imageFile").files[0];
-
-    const preview =
-        document.getElementById("preview");
+    const file = document.getElementById("imageFile").files[0];
+    const preview = document.getElementById("preview");
 
     if (!file) {
         preview.style.display = "none";
+        preview.removeAttribute("src");
         return;
     }
 
     preview.src = URL.createObjectURL(file);
-
     preview.style.display = "block";
 }
 
-
-/* ================================
-   UPLOAD IMAGE
-   ================================ */
-
+/* UPLOAD IMAGE */
 async function uploadImage() {
+    if (uploadInProgress) return;
 
-    const title =
-        document.getElementById("title").value.trim();
-
-    const category =
-        document.getElementById("category").value;
-
-    const file =
-        document.getElementById("imageFile").files[0];
-
-    const message =
-        document.getElementById("message");
-
+    const title = document.getElementById("title").value.trim();
+    const category = document.getElementById("category").value;
+    const file = document.getElementById("imageFile").files[0];
+    const message = document.getElementById("message");
+    const button = document.getElementById("uploadButton");
 
     if (!title || !category || !file) {
-
         message.style.color = "red";
-
-        message.textContent =
-            "Please fill all fields.";
-
+        message.textContent = "Please fill all fields.";
         return;
     }
 
+    if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
+        message.style.color = "red";
+        message.textContent = "Choose a JPG, PNG, or WebP image.";
+        return;
+    }
 
     if (file.size > 10 * 1024 * 1024) {
-
         message.style.color = "red";
-
-        message.textContent =
-            "Image must be less than 10 MB.";
-
+        message.textContent = "Image must be less than 10 MB.";
         return;
     }
 
-
+    uploadInProgress = true;
+    button.disabled = true;
+    button.textContent = "Uploading...";
     message.style.color = "#555";
+    message.textContent = "Uploading image. Please wait...";
 
-    message.textContent =
-        "Uploading...";
-
+    let uploadedPath = null;
 
     try {
+        const { data: sessionData, error: sessionError } =
+            await supabaseClient.auth.getSession();
 
-        const fileName =
-            Date.now() + "-" +
-            file.name.replace(/\s+/g, "-");
+        if (sessionError) throw sessionError;
 
-
-        /* Upload to Storage */
-
-        const { error: uploadError } =
-            await supabaseClient.storage
-                .from("themes-images")
-                .upload(fileName, file);
-
-
-        if (uploadError) {
-            throw uploadError;
+        if (!sessionData.session) {
+            throw new Error("Your session expired. Please log in again.");
         }
 
+        const safeName = file.name
+            .normalize("NFKD")
+            .replace(/[^a-zA-Z0-9._-]/g, "-");
 
-        /* Get public image URL */
+        const fileName =
+            Date.now() + "-" + safeName;
 
+        /* UPLOAD TO STORAGE */
+        const { data: uploadedFile, error: uploadError } =
+            await supabaseClient.storage
+                .from(BUCKET_NAME)
+                .upload(fileName, file, {
+                    cacheControl: "3600",
+                    upsert: false,
+                    contentType: file.type
+                });
+
+        if (uploadError) throw uploadError;
+
+        uploadedPath = uploadedFile.path;
+
+        /* GET PUBLIC IMAGE URL */
         const { data: publicData } =
             supabaseClient.storage
-                .from("themes-images")
-                .getPublicUrl(fileName);
+                .from(BUCKET_NAME)
+                .getPublicUrl(uploadedPath);
 
+        const imageUrl = publicData.publicUrl;
 
-        const imageUrl =
-            publicData.publicUrl;
-
-
-        /* Save image information */
-
+        /* SAVE IMAGE INFORMATION */
         const { error: databaseError } =
             await supabaseClient
                 .from("themes_images")
@@ -328,52 +299,55 @@ async function uploadImage() {
                     image_url: imageUrl
                 }]);
 
-
         if (databaseError) {
-            throw databaseError;
+            throw new Error(
+                "Image reached Storage, but saving its details failed: " +
+                databaseError.message
+            );
         }
 
-
         message.style.color = "green";
-
-        message.textContent =
-            "✅ Image uploaded successfully!";
-
+        message.textContent = "✅ Image uploaded successfully!";
 
         document.getElementById("title").value = "";
-
         document.getElementById("category").value = "";
-
         document.getElementById("imageFile").value = "";
 
-        document.getElementById("preview").style.display = "none";
+        const preview = document.getElementById("preview");
+        if (preview.src.startsWith("blob:")) {
+            URL.revokeObjectURL(preview.src);
+        }
+        preview.removeAttribute("src");
+        preview.style.display = "none";
 
-    }
-
-    catch (error) {
-
-        console.error(error);
+    } catch (error) {
+        console.error("Upload error:", error);
 
         message.style.color = "red";
 
-        message.textContent =
-            "Upload failed: " + error.message;
+        if (error.message === "Failed to fetch") {
+            message.textContent =
+                "Connection failed. Check Supabase status and network.";
+        } else {
+            message.textContent =
+                "Upload failed: " + (error.message || "Unknown error");
+        }
+
+    } finally {
+        uploadInProgress = false;
+        button.disabled = false;
+        button.textContent = "⬆️ Upload Image";
     }
 }
 
-
-/* ================================
-   LOGOUT
-   ================================ */
-
+/* LOGOUT */
 async function logoutAdmin() {
-
-    await supabaseClient.auth.signOut();
-
-    window.location.href = "admin.html";
+    try {
+        await supabaseClient.auth.signOut();
+    } finally {
+        window.location.href = "./admin.html";
+    }
 }
-
 </script>
-
 </body>
 </html>
