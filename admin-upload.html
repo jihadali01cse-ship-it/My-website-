@@ -281,7 +281,7 @@ async function uploadImage() {
 
         uploadedPath = uploadedFile.path;
 
-        /* GET PUBLIC IMAGE URL */
+        /* GET PUBLIC IMAGE URL */ 
         const { data: publicData } =
             supabaseClient.storage
                 .from(BUCKET_NAME)
