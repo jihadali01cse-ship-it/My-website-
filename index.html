@@ -1182,7 +1182,41 @@ body.dark .gallery-item-info h3 {
         columns: 1;
     }
 }
+     /* LIVE MAP DESIGN */
+#map {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+#map h2 {
+  margin-bottom: 15px;
+}
+
+#locationStatus {
+  margin: 15px 0;
+  color: var(--text-color);
+}
+
+.map-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+
+.map-buttons button {
+  padding: 12px 22px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  background: var(--primary-color);
+  color: white;
+  font-weight: bold;
+}
     </style>
+ <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 
 <body>
@@ -1197,6 +1231,7 @@ body.dark .gallery-item-info h3 {
         <a href="#projects">Projects</a>
         <a href="#ai-assistant">🤖 AI Assistant</a>
         <a href="#themes">🎨 Themes</a>
+        <a href="#map">📍 Live Map</a>
         <a href="#contact">Contact</a>
         <a href="./Admin.html">🔐 Admin Login</a>
 
@@ -1572,8 +1607,20 @@ body.dark .gallery-item-info h3 {
                     💻 Computer Science
                  
                 </div>
+          <!-- LIVE MAP -->
+           <section id="map" class="section">
+             <div class="container">
+              <h2>📍 Live Location Map</h2>
+                <p id="locationStatus">Click the button below to enable your live location.</p>
 
+               <div class="map-buttons">
+             <button onclick="startLiveLocation()">▶️ Start Live Location</button>
+           <button onclick="stopLiveLocation()">■ Stop</button>
+    </div>
 
+    <div id="liveMap" style="height:400px; width:100%; border-radius:15px; margin-top:20px;"></div>
+  </div>
+</section>
             <!-- CONTACT FORM -->
 
             <form
@@ -2220,6 +2267,78 @@ document.addEventListener("keydown", event => {
 
     document.head.appendChild(script);
 })();
+  // LIVE MAP
+let liveMap;
+let liveMarker;
+let locationCircle;
+let watchId = null;
+
+function startLiveLocation() {
+  if (!navigator.geolocation) {
+    document.getElementById("locationStatus").textContent =
+      "Geolocation is not supported by this browser.";
+    return;
+  }
+
+  if (!liveMap) {
+    liveMap = L.map("liveMap").setView([22.5726, 88.3639], 13);
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: "&copy; OpenStreetMap contributors"
+    }).addTo(liveMap);
+  }
+
+  if (watchId !== null) return;
+
+  document.getElementById("locationStatus").textContent =
+    "Waiting for location permission...";
+
+  watchId = navigator.geolocation.watchPosition(
+    function(position) {
+      const lat = position.coords.latitude;
+      const lng = position.coords.longitude;
+
+      if (!liveMarker) {
+        liveMarker = L.marker([lat, lng]).addTo(liveMap)
+          .bindPopup("Your Current Location");
+        locationCircle = L.circle([lat, lng], {
+          radius: position.coords.accuracy
+        }).addTo(liveMap);
+      } else {
+        liveMarker.setLatLng([lat, lng]);
+        locationCircle.setLatLng([lat, lng]);
+        locationCircle.setRadius(position.coords.accuracy);
+      }
+
+      liveMap.setView([lat, lng], 16);
+
+      document.getElementById("locationStatus").textContent =
+        "Live location is active. Accuracy: " +
+        Math.round(position.coords.accuracy) + " meters.";
+    },
+    function(error) {
+      document.getElementById("locationStatus").textContent =
+        "Location error: " + error.message;
+      watchId = null;
+    },
+    {
+      enableHighAccuracy: true,
+      maximumAge: 5000,
+      timeout: 15000
+    }
+  );
+}
+
+function stopLiveLocation() {
+  if (watchId !== null) {
+    navigator.geolocation.clearWatch(watchId);
+    watchId = null;
+  }
+
+  document.getElementById("locationStatus").textContent =
+    "Live location stopped.";
+}
+  
 </script>
 </body>
 </html>
