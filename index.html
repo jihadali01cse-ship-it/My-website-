@@ -1413,7 +1413,111 @@ button:hover,
         margin-right: 10px;
     }
 }
-     
+     /* PREMIUM COLORFUL CONTACT FORM */
+
+#contact {
+    padding: 60px 20px;
+    background: linear-gradient(135deg, #101735, #241044, #102b46);
+}
+
+#contact .contact-box {
+    max-width: 750px;
+    margin: auto;
+    padding: 35px;
+    border-radius: 25px;
+    background: linear-gradient(
+        135deg,
+        rgba(0, 200, 255, 0.15),
+        rgba(168, 85, 247, 0.18),
+        rgba(255, 60, 150, 0.12)
+    );
+    border: 1px solid rgba(255,255,255,0.3);
+    box-shadow: 0 15px 45px rgba(0,0,0,0.4);
+    backdrop-filter: blur(18px);
+}
+
+#contact .contact-box > p {
+    color: #e0e7ff;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+#contact .contact-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+#contact .info {
+    flex: 1;
+    min-width: 180px;
+    padding: 17px;
+    text-align: center;
+    color: white;
+    border-radius: 15px;
+    background: linear-gradient(135deg, #087cff, #8b5cf6);
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+#contact form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+#contact input:not([type="hidden"]),
+#contact textarea {
+    width: 100%;
+    padding: 16px;
+    border-radius: 14px;
+    color: white;
+    background: rgba(255,255,255,0.10);
+    border: 1px solid rgba(0,220,255,0.45);
+    outline: none;
+    font-size: 15px;
+    box-sizing: border-box;
+}
+
+#contact input::placeholder,
+#contact textarea::placeholder {
+    color: #cbd5e1;
+}
+
+#contact input:focus,
+#contact textarea:focus {
+    border-color: #00eaff;
+    box-shadow: 0 0 15px rgba(0,234,255,0.3);
+}
+
+#contact textarea {
+    min-height: 140px;
+    resize: vertical;
+}
+
+#contact .send {
+    padding: 16px;
+    border: none;
+    border-radius: 30px;
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    background: linear-gradient(90deg, #087cff, #8b5cf6, #ec4899);
+    box-shadow: 0 5px 25px rgba(139,92,246,0.4);
+    transition: 0.3s;
+}
+
+#contact .send:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 25px #8b5cf6;
+}
+
+@media(max-width:600px) {
+    #contact .contact-box {
+        padding: 22px 16px;
+    }
+}
    
     </style>
  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
@@ -1432,8 +1536,8 @@ button:hover,
         <a href="#projects">Projects</a>
         <a href="#ai-assistant">🤖 AI Assistant</a>
         <a href="#themes">🎨 Themes</a>
-        <a href="#map">📍 Live Map</a>
         <a href="#contact">Contact</a>
+        <a href="#map">📍 Live Map</a>
         <a href="./Admin.html">🔐 Admin Login</a>
 
         <button
@@ -1488,8 +1592,7 @@ button:hover,
       <div class="quick-access">
 
     <h2>⭐ Quick Access</h2>
-    <p>Jump to your favourite section</p>
-
+    
     <div class="quick-grid">
 
         <a href="#home" class="quick-card blue">
@@ -1849,20 +1952,7 @@ button:hover,
                     💻 Computer and mobile
                  
                 </div>
-     </section>
-          <!-- LIVE MAP -->
-           <section id="map" class="section">
-             <div class="container">
-              <h2>📍 Live Location Map</h2>
-                <p id="locationStatus">Click the button below to enable your live location.</p>
-
-               <div class="map-buttons">
-             <button onclick="startLiveLocation()">▶️ Start Live Location</button>
-           <button onclick="stopLiveLocation()">■ Stop</button>
-    </div>
-
-    <div id="liveMap" style="height:400px; width:100%; border-radius:15px; margin-top:20px;"></div>
-  </div>
+      
 </section>
             <!-- CONTACT FORM -->
 
@@ -1945,8 +2035,20 @@ button:hover,
         </div>
 
     </section>
+ <!-- LIVE MAP -->
+           <section id="map" class="section">
+             <div class="container">
+              <h2>📍 Live Location Map</h2>
+                <p id="locationStatus">Click the button below to enable your live location.</p>
 
+               <div class="map-buttons">
+             <button onclick="startLiveLocation()">▶️ Start Live Location</button>
+           <button onclick="stopLiveLocation()">■ Stop</button>
+    </div>
 
+    <div id="liveMap" style="height:400px; width:100%; border-radius:15px; margin-top:20px;"></div>
+  </div>
+</section>
     <!-- FOOTER -->
 
     <footer>
