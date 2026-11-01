@@ -24,153 +24,157 @@
             transition: 0.3s;
         }
 
-        /* NAVIGATION */
+        /* NAVIGATION - NEON GLASS DESIGN */
 
-        nav {
-            background: #101827;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 25px;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-        }
+nav {
+    background: rgba(12, 18, 40, 0.92);
+    backdrop-filter: blur(18px);
+    padding: 16px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(0, 212, 255, 0.3);
+    box-shadow: 0 5px 25px rgba(0, 212, 255, 0.12);
+}
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: bold;
-            transition: 0.3s;
-        }
+nav a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 10px 14px;
+    border-radius: 12px;
+    transition: 0.3s ease;
+}
 
-        nav a:hover {
-            color: #00d4ff;
-        }
+nav a:hover {
+    color: #00eaff;
+    background: rgba(0, 212, 255, 0.12);
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+    transform: translateY(-3px);
+}
 
-        .theme-button {
-            width: auto;
-            padding: 8px 14px;
-            margin: 0;
-            border-radius: 20px;
-            background: white;
-            color: #172033;
-            font-size: 14px;
-            border: none;
-            cursor: pointer;
-        }
+.theme-button {
+    width: auto;
+    padding: 10px 17px;
+    margin: 0;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #00d4ff, #7c4dff);
+    color: white;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
 
-        .theme-button:hover {
-            background: #00d4ff;
-            color: white;
-        }
+.theme-button:hover {
+    transform: scale(1.06);
+    box-shadow: 0 0 18px #00d4ff;
+}
 
-        /* HOME */
+/* HOME - NEON DESIGN */
 
-        .home {
-            min-height: 92vh;
-            padding: 70px 20px;
-            text-align: center;
-            color: white;
+.home {
+    min-height: 92vh;
+    padding: 70px 20px;
+    text-align: center;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+    background:
+        radial-gradient(circle at 15% 20%, rgba(0,212,255,0.25), transparent 35%),
+        radial-gradient(circle at 85% 80%, rgba(170,0,255,0.28), transparent 35%),
+        linear-gradient(135deg, #080d24, #17113b, #102d50);
+}
 
-            background:
-                radial-gradient(
-                    circle at top left,
-                    rgba(0,212,255,0.25),
-                    transparent 35%
-                ),
-                radial-gradient(
-                    circle at bottom right,
-                    rgba(100,70,200,0.30),
-                    transparent 35%
-                ),
-                linear-gradient(
-                    135deg,
-                    #101827,
-                    #1d3557,
-                    #264b70
-                );
-        }
+.profile-photo {
+    width: 175px;
+    height: 175px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid #00eaff;
+    margin-bottom: 25px;
 
-        .profile-photo {
-            width: 175px;
-            height: 175px;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 5px solid white;
-            margin-bottom: 25px;
+    box-shadow:
+        0 0 15px #00eaff,
+        0 0 35px rgba(124, 77, 255, 0.7);
 
-            box-shadow:
-                0 15px 40px rgba(0,0,0,0.45);
+    transition: 0.4s;
+}
 
-            transition: 0.4s;
-        }
+.profile-photo:hover {
+    transform: scale(1.07);
+    box-shadow: 0 0 30px #00eaff;
+}
 
-        .profile-photo:hover {
-            transform: scale(1.05);
-        }
+.welcome {
+    color: #00eaff;
+    font-size: 15px;
+    letter-spacing: 4px;
+    margin-bottom: 12px;
+    font-weight: bold;
+    text-shadow: 0 0 15px #00d4ff;
+}
 
-        .welcome {
-            color: #00d4ff;
-            font-size: 15px;
-            letter-spacing: 3px;
-            margin-bottom: 12px;
-            font-weight: bold;
-        }
+.home h1 {
+    font-size: 55px;
+    margin-bottom: 18px;
+    background: linear-gradient(90deg, #00eaff, #b56cff, #ff4fd8);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 0 12px rgba(0,212,255,0.3));
+}
 
-        .home h1 {
-            font-size: 55px;
-            margin-bottom: 18px;
-        }
+.home p {
+    max-width: 720px;
+    font-size: 20px;
+    line-height: 1.7;
+    color: #e8eef5;
+}
 
-        .home p {
-            max-width: 720px;
-            font-size: 20px;
-            line-height: 1.7;
-            color: #e8eef5;
-        }
+.home-buttons {
+    margin-top: 30px;
+}
 
-        .home-buttons {
-            margin-top: 30px;
-        }
+.home-buttons button {
+    padding: 14px 28px;
+    margin: 7px;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    background: linear-gradient(135deg, #00d4ff, #6750ff);
+    color: white;
+    transition: 0.3s;
+    box-shadow: 0 5px 20px rgba(0,212,255,0.25);
+}
 
-        .home-buttons button {
-            padding: 14px 28px;
-            margin: 5px;
-            border: none;
-            border-radius: 30px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            background: white;
-            color: #172033;
-            transition: 0.3s;
-        }
+.home-buttons button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 25px #00d4ff;
+}
 
-        .home-buttons button:hover {
-            transform: translateY(-4px);
-            background: #00d4ff;
-            color: white;
-        }
+.home-buttons .outline {
+    background: transparent;
+    color: #ffffff;
+    border: 2px solid #bd75ff;
+}
 
-        .home-buttons .outline {
-            background: transparent;
-            color: white;
-            border: 2px solid white;
-        }
-
-        .home-buttons .outline:hover {
-            background: white;
-            color: #172033;
-        }
+.home-buttons .outline:hover {
+    background: linear-gradient(135deg, #8b5cf6, #ec4899);
+    color: white;
+}
 
         /* GENERAL SECTION */
 
@@ -1213,6 +1217,30 @@ body.dark .gallery-item-info h3 {
   background: var(--primary-color);
   color: white;
   font-weight: bold;
+}
+     @media (max-width: 768px) {
+    nav {
+        gap: 7px;
+        padding: 12px 8px;
+    }
+
+    nav a {
+        font-size: 12px;
+        padding: 8px 10px;
+    }
+
+    .home h1 {
+        font-size: 38px;
+    }
+
+    .home p {
+        font-size: 16px;
+    }
+
+    .profile-photo {
+        width: 140px;
+        height: 140px;
+    }
 }
     </style>
  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
